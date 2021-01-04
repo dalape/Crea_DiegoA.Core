@@ -3,7 +3,7 @@ using Crea_DiegoA.Core.Exceptions;
 using System;
 using System.Linq;
 
-namespace Crea_DiegoA.Core.Reposity
+namespace Crea_DiegoA.Core.Reposity.Workers
 {
     public class ProductWorker : IProductWorker
     {
@@ -16,7 +16,7 @@ namespace Crea_DiegoA.Core.Reposity
                 {
                     Product product = new Product()
                     {
-                        CreatedDate = DateTime.Now,
+                        CreatedDate = DateTime.UtcNow,
                         Description = productDto.Description,
                         Name = productDto.Name,
                         UnitPrice = productDto.UnitPrice
@@ -100,7 +100,7 @@ namespace Crea_DiegoA.Core.Reposity
                     Product.Description = productDto.Description;
                     Product.Name = productDto.Name;
                     Product.UnitPrice = productDto.UnitPrice;
-                    Product.UpdatedDate = DateTime.Now;
+                    Product.UpdatedDate = DateTime.UtcNow;
 
                     return context.SaveChanges() == 1;
                 }

@@ -16,7 +16,7 @@ namespace Crea_DiegoA.Core.Reposity.Workers
                 {
                     Customer customer = new Customer()
                     {
-                        CreatedDate = DateTime.Now,
+                        CreatedDate = DateTime.UtcNow,
                         Document = customerDto.Document,
                         Email = customerDto.Email,
                         FirtsName = customerDto.FirtsName,
@@ -67,6 +67,23 @@ namespace Crea_DiegoA.Core.Reposity.Workers
         }
 
         /// <inheritdoc/>
+        public CustomerDto Search(int id)
+        {
+            try
+            {
+                using (var context = new Connection_Crea_Test_DA())
+                {
+                    var customer = context.Customer.FirstOrDefault(row => row.ID == id);
+                    return ConvertToDto(customer);
+                }
+            }
+            catch (CustomerWorkerException ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <inheritdoc/>
         public CustomerDto SearchByName(string name)
         {
             try
@@ -74,17 +91,7 @@ namespace Crea_DiegoA.Core.Reposity.Workers
                 using (var context = new Connection_Crea_Test_DA())
                 {
                     var customer = context.Customer.FirstOrDefault(row => row.FirtsName.Contains(name) || row.LastName.Contains(name));
-                    CustomerDto customerDto = new CustomerDto()
-                    {
-                        Document = customer.Document,
-                        Email = customer.Email,
-                        Enable = (bool)customer.Enable,
-                        FirtsName = customer.FirtsName,
-                        ID = customer.ID,
-                        LastName = customer.LastName
-                    };
-
-                    return customerDto;
+                    return ConvertToDto(customer);
                 }
             }
             catch (CustomerWorkerException ex)
@@ -105,7 +112,7 @@ namespace Crea_DiegoA.Core.Reposity.Workers
                     customer.FirtsName = customerDto.FirtsName;
                     customer.LastName = customerDto.LastName;
                     customer.Phone = customerDto.Phone;
-                    customer.UpdatedDate = DateTime.Now;
+                    customer.UpdatedDate = DateTime.UtcNow;
 
                     return context.SaveChanges() == 1;
                 }
@@ -124,6 +131,28 @@ namespace Crea_DiegoA.Core.Reposity.Workers
                 {
                     return context.Customer.FirstOrDefault(row => row.Document == document);
                 }
+            }
+            catch (CustomerWorkerException ex)
+            {
+                throw ex;
+            }
+        }
+
+        private CustomerDto ConvertToDto(Customer customer)
+        {
+            try
+            {
+                CustomerDto customerDto = new CustomerDto()
+                {
+                    Document = customer.Document,
+                    Email = customer.Email,
+                    Enable = Convert.ToBoolean(customer.Enable),
+                    FirtsName = customer.FirtsName,
+                    ID = customer.ID,
+                    LastName = customer.LastName
+                };
+
+                return customerDto;
             }
             catch (CustomerWorkerException ex)
             {

@@ -1,6 +1,6 @@
 ﻿using Crea_DiegoA.Core.DTOs;
 
-namespace Crea_DiegoA.Core.Reposity
+namespace Crea_DiegoA.Core.Reposity.Workers
 {
     public interface IProductWorker
     {

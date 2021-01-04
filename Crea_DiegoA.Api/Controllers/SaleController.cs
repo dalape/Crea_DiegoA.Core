@@ -1,5 +1,5 @@
 ﻿using Crea_DiegoA.Core.DTOs;
-using Crea_DiegoA.Core.Reposity;
+using Crea_DiegoA.Core.Reposity.Workers;
 using Crea_DiegoA.Core.Enums;
 using System;
 using System.Net;
@@ -10,10 +10,14 @@ namespace Crea_DiegoA.Api.Controllers
     public class SaleController : ApiController
     {
         private readonly ISaleWorker saleWorker;
+        private readonly IProductWorker productWorker;
+        private readonly ICustomerWorker customerWorker;
 
         public SaleController()
         {
             saleWorker = new SaleWorker();
+            productWorker = new ProductWorker();
+            customerWorker = new CustomerWorker();
         }
 
         [HttpPost]
@@ -23,6 +27,20 @@ namespace Crea_DiegoA.Api.Controllers
             if (saleDto == null)
             {
                 return (BadRequest(ModelState));
+            }
+
+            var customer = customerWorker.Search(saleDto.CustomerID);
+
+            if (!Convert.ToBoolean(customer.Enable))
+            {
+                return (BadRequest($"El cliente {saleDto.CustomerID} se encuentra desactivado. No se puede realizar la venta."));
+            }
+
+            var product = productWorker.Search(saleDto.ProductID);
+
+            if (!Convert.ToBoolean(product.Enable))
+            {
+                return (BadRequest($"El producto {saleDto.ProductID} se encuentra desactivado. No se puede realizar la venta."));
             }
 
             saleDto.SalesGuid = Guid.NewGuid();
@@ -67,11 +85,16 @@ namespace Crea_DiegoA.Api.Controllers
                 return (BadRequest(ModelState));
             }
 
+            if (!Enum.IsDefined(typeof(StateTypes.States), state))
+            {
+                return (BadRequest($"No existe estado de venta con el código {state}"));
+            }
+
             StateTypes.States stateType = (StateTypes.States)Enum.ToObject(typeof(StateTypes.States), state);
 
             if (!saleWorker.ChangeState(id, stateType))
             {
-                ModelState.AddModelError("", "Ocurrió un error al desactivar la venta " + id);
+                ModelState.AddModelError("", "Ocurrió un error al cambiar el estado de la venta " + id);
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
             else

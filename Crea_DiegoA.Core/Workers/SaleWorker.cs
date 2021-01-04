@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using static Crea_DiegoA.Core.Enums.StateTypes;
 
-namespace Crea_DiegoA.Core.Reposity
+namespace Crea_DiegoA.Core.Reposity.Workers
 {
     public class SaleWorker : ISaleWorker
     {
@@ -16,7 +16,7 @@ namespace Crea_DiegoA.Core.Reposity
                 {
                     Sale sale = new Sale()
                     {
-                        SaleDate = DateTime.Now,
+                        SaleDate = DateTime.UtcNow,
                         SaleGuid = saleDto.SalesGuid,
                         CustomerID = saleDto.CustomerID,
                         ProductID = saleDto.ProductID,
@@ -88,18 +88,8 @@ namespace Crea_DiegoA.Core.Reposity
                 using (var context = new Connection_Crea_Test_DA())
                 {
                     var sale = context.Sale.FirstOrDefault(row => row.SaleGuid == salesId);
-                    SaleDto saleDto = new SaleDto()
-                    {
-                        CustomerID = sale.CustomerID,
-                        ID = sale.ID,
-                        ProductID = sale.ProductID,
-                        Quantity = sale.Quantity,
-                        SaleDate = (DateTime)sale.SaleDate,
-                        SalesGuid = (Guid)sale.SaleGuid,
-                        State = sale.State
-                    };
 
-                    return saleDto;
+                    return ConvertToDto(sale);
                 }
             }
             catch (SaleWorkerException ex)
@@ -135,6 +125,29 @@ namespace Crea_DiegoA.Core.Reposity
                 {
                     return context.Sale.FirstOrDefault(row => row.ID == id);
                 }
+            }
+            catch (SaleWorkerException ex)
+            {
+                throw ex;
+            }
+        }
+
+        private SaleDto ConvertToDto(Sale sale)
+        {
+            try
+            {
+                SaleDto saleDto = new SaleDto()
+                {
+                    CustomerID = sale.CustomerID,
+                    ID = sale.ID,
+                    ProductID = sale.ProductID,
+                    Quantity = sale.Quantity,
+                    SaleDate = (DateTime)sale.SaleDate,
+                    SalesGuid = (Guid)sale.SaleGuid,
+                    State = sale.State
+                };
+
+                return saleDto;
             }
             catch (SaleWorkerException ex)
             {

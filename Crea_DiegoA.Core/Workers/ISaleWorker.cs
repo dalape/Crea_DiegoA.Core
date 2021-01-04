@@ -2,7 +2,7 @@
 using System;
 using static Crea_DiegoA.Core.Enums.StateTypes;
 
-namespace Crea_DiegoA.Core.Reposity
+namespace Crea_DiegoA.Core.Reposity.Workers
 {
     public interface ISaleWorker
     {

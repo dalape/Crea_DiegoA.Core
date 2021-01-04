@@ -4,9 +4,10 @@
     {
         public enum States
         {
-            Accept,
-            Confirm,
-            Annullate
+            Accept = 1,
+            Confirm = 2,
+            Annullate = 3,
+            Rejected = 4
         }
     }
 }

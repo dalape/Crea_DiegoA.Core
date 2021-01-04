@@ -1,5 +1,5 @@
 ﻿using Crea_DiegoA.Core.DTOs;
-using Crea_DiegoA.Core.Reposity;
+using Crea_DiegoA.Core.Reposity.Workers;
 using System.Net;
 using System.Web.Http;
 
@@ -71,6 +71,26 @@ namespace Crea_DiegoA.Api.Controllers
             else
             {
                 return Ok("producto desactivado con éxito");
+            }
+        }
+
+        [HttpGet]
+        [Route("api/product/active/{productID}")]
+        public IHttpActionResult Active(int productID)
+        {
+            if (productID == 0)
+            {
+                return (BadRequest(ModelState));
+            }
+
+            if (!productWorker.ChangeState(productID, true))
+            {
+                ModelState.AddModelError("", "Ocurrió un error al activar el producto " + productID);
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+            else
+            {
+                return Ok("producto activado con éxito");
             }
         }
 

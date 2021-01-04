@@ -25,6 +25,12 @@ namespace Crea_DiegoA.Core.Reposity.Workers
         /// <summary>
         /// Search customer by document
         /// </summary>
+        /// <param name="id">Identifier number</param>
+        /// <returns>Information about customer</returns>
+        CustomerDto Search(int id);
+        /// <summary>
+        /// Search customer by document
+        /// </summary>
         /// <param name="document">Document number</param>
         /// <returns>Information about customer</returns>
         Customer Search(string document);

@@ -1,5 +1,5 @@
 ﻿using Crea_DiegoA.Core.DTOs;
-using Crea_DiegoA.Core.Reposity;
+using Crea_DiegoA.Core.Reposity.Workers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Crea_DiegoA.CoreTests.Workers

@@ -75,6 +75,26 @@ namespace Crea_DiegoA.Api.Controllers
         }
 
         [HttpGet]
+        [Route("api/customer/active/{document}")]
+        public IHttpActionResult Active(string document)
+        {
+            if (string.IsNullOrEmpty(document))
+            {
+                return (BadRequest(ModelState));
+            }
+
+            if (!customerWorker.ChangeState(document, true))
+            {
+                ModelState.AddModelError("", "Ocurrió un error al activar el cliente " + document);
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+            else
+            {
+                return Ok("Cliente activado con éxito");
+            }
+        }
+
+        [HttpGet]
         [Route("api/customer/search/{name}")]
         public IHttpActionResult Search(string name)
         {
