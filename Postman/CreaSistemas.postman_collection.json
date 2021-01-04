@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "dbf7ec1f-0722-4b7c-95a5-8ea1d6800358",
+		"name": "CreaSistemas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "customer-Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"FirtsName\": \"Juanito\",\r\n  \"LastName\": \"Jimenez\",\r\n  \"Document\": \"909090\",\r\n  \"Phone\": \"4330090\",\r\n  \"Email\": \"juanito@correo.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/customer/create",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Description\": \"Producto desde api\",\r\n  \"Name\": \"Tele\",\r\n  \"UnitPrice\": 12000000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/product/create",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"product",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sale-Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"CustomerID\": 3,\r\n  \"ProductID\": 2,\r\n  \"Quantity\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/sale/create",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"sale",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customer-Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"FirtsName\": \"Juanito\",\r\n  \"LastName\": \"Jimenez\",\r\n  \"Document\": \"909090\",\r\n  \"Phone\": \"7809800\",\r\n  \"Email\": \"juanito@correo.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/customer/update",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ID\": 8,\r\n  \"Description\": \"Producto desde api\",\r\n  \"Name\": \"Tele\",\r\n  \"UnitPrice\": 10000000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/product/update",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"product",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sale-Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ID\": 5,\r\n  \"CustomerID\": 1,\r\n  \"ProductID\": 2,\r\n  \"Quantity\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/sale/update",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"sale",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customer-Desactive",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/customer/desactive/909090",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"desactive",
+						"909090"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-Desactive",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/product/desactive/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"product",
+						"desactive",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-Desactive Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/sale/changeState/5/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"sale",
+						"changeState",
+						"5",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customer-Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/customer/search/jim",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"search",
+						"jim"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/product/search/tele",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"product",
+						"search",
+						"tele"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sale-Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/sale/search/3BA91C62-8DB9-4792-9CEF-C087BC799527",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"sale",
+						"search",
+						"3BA91C62-8DB9-4792-9CEF-C087BC799527"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
