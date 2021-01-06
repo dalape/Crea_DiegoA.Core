@@ -1,17 +1,17 @@
-print '--****** Creación de tablas y data inicial para la prueba de Crea sistemas. Realizada por Diego Alape ******--'
-print '***** Inicio de ejecución ' + Convert(varchar(50), getdate()) + ' *****'
+print '--****** table creation and initial data ******--'
+print '***** start execution ' + Convert(varchar(50), getdate()) + ' *****'
 
 Use Crea_Test_DA
 Declare @tableName varchar(50)
 
 Set @tableName = 'Customer'
 IF OBJECT_ID(@tableName) is not null Begin
-	print '--> Eliminando tabla ' + @tableName
+	print '--> Dropping Table ' + @tableName
 	Drop table Sale
 	Drop table Customer
 End
 
-print '--> Creando tabla ' + @tableName
+print '--> Creating table ' + @tableName
 Create table Customer
 (
 	ID int identity primary key,
@@ -27,11 +27,11 @@ Create table Customer
 
 Set @tableName = 'Product'
 IF OBJECT_ID(@tableName) is not null Begin
-	print '--> Eliminando tabla ' + @tableName
+	print '--> Dropping table ' + @tableName
 	Drop table Product
 End
 
-print '--> Creando tabla ' + @tableName
+print '--> Creating table ' + @tableName
 Create table Product
 (
 	ID int identity primary key,
@@ -45,11 +45,11 @@ Create table Product
 
 Set @tableName = 'Sale'
 IF OBJECT_ID(@tableName) is not null Begin
-	print '--> Eliminando tabla ' + @tableName
+	print '--> Dropping table ' + @tableName
 	Drop table Sale
 End
 
-print '--> Creando tabla ' + @tableName
+print '--> Creating table ' + @tableName
 Create table Sale
 (
 	ID int identity primary key,
@@ -61,20 +61,20 @@ Create table Sale
 	SaleDate datetime default getdate() null
 )
 
-print '**** Insertando data inicial ****'
-print '--> Insertando Clientes '
+print '**** Inserting initial data ****'
+print '--> Inserting Customer'
 Insert Into Customer
 Values	('Diego Fernando', 'Alape', '103070256', '30001010', 'dalape47@gmail.com', null, default, null),
 		('Maria Fernanda', 'Zapata', '19002302', '31388990', 'mafez@gmail.com', null, default, null)
 
-print '--> Insertando Productos'
+print '--> Inserting Products'
 Insert Into Product
 Values	('Computador ACER', 'Portatil de 16 pulgadas marca ACER', 1500000, 1, default, null),
 		('Mouse Genius', 'Mouse marca Genius', 50000, 1, default, null),
 		('Monitor Samsung', 'Monitor de 21 pulgadas curvo marca Samsung', 900000, 1, default, null)
 
-print '--> Insertando Ventas'
+print '--> Inserting Sales'
 Insert Into Sale
 Values	(NEWID(), 1, 1, default, 'Aceptada', default)
 
-print '***** Fin de ejecución ' + Convert(varchar(50), getdate()) + ' *****'
+print '***** End of execution ' + Convert(varchar(50), getdate()) + ' *****'
