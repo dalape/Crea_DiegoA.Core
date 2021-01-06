@@ -1,15 +1,15 @@
 # Crea_DiegoA.Core
-Prueba técnica para Crea Sistemas
-#### Lenguaje de programación .Net Framework 4.7.2 c#.
-### Configuración
-* Ejecutar el script **1. Create Database.sql** en la carpeta **SQL** en motor de datos **SQL Server**, Version 2012+. 
-* Ejecutar el script **2. Objects and initial Data.sql** en la carpeta **SQL** en motor de datos **SQL Server**, Version 2012+.
-* Abrir en **Visual Studio 2019**. 
-* Cambiar la cadena de conexión en el archivo **Web.config** del proyecto **Crea_DiegoA.Api**, y en la cadena llamada **Connection_Crea_Test_DA** cambiar el nombre de la base de datos creada anteriormente, junto con el usuario y contraseña.
-* Establecer el proyecto de inicio **Crea_DiegoA.Api**.
+Technical test for "Crea Sistemas"
+#### Programming language .Net Framework 4.7.2 c#.
+### configuration
+* execute the script **1. Create Database.sql** in the folder **SQL** in the data engine **SQL Server**, version 2012+. 
+* execute the script **2. Objects and initial Data.sql** in the folder **SQL** in the data engine **SQL Server**, version 2012+.
+* Open in **Visual Studio 2019**. 
+* change connection string in file **Web.config** in the project **Crea_DiegoA.Api**, in the key **Connection_Crea_Test_DA** rename the database,user and password.
+* set startup project **Crea_DiegoA.Api**.
 ### Endpoints
-En la carpeta de **POSTMAN**, se adjunta la colección y el entorno para ejecución y prueas de los apis, un ejemplo del consumo de los apis es el siguiente:
-* https://localhost:44358/api/customer/create: **POST**, Crea un cliente. Utiliza el siguiente objecto json para su consumo:
+in the folder **POSTMAN**, the collection and environment exist for testing execution of the Apis, Example:
+* https://localhost:44358/api/customer/create: **POST**, create a customer with the following JSon object:
    {
     "FirtsName": "Juanito",
     "LastName": "Jimenez",
@@ -18,11 +18,11 @@ En la carpeta de **POSTMAN**, se adjunta la colección y el entorno para ejecuci
     "Email": "juanito@correo.com"
   }
 
-* En el api de cambio de estado de la venta, https://localhost:44358/api/sale/changeState/{id}/{state} : **GET**, se debe tener en cuenta que los códigos de los estados son los siguientes:
+* In the change of sale status, https://localhost:44358/api/sale/changeState/{id}/{state} : **GET**, the following status codes should be observed:
 
 ** 1: Acceptada
 ** 2: Confirmada
 ** 3: Anulada
 ** 4: Rechazada
 
-Si se envia un código que no se encuentre en la lista, el api enviara un mensaje notificando que el estado no exite.
+If an incorrect code is sent, a message will be displayed informing the incorrect status.
